@@ -1,15 +1,57 @@
 ---
----
+import '../layouts/MainLayout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import profile_pic from '../images/me.jpg'
+import ArticlePreview from '../components/ArticlePreview.astro'
+import { FileText, ArrowRight, Play, Calendar} from 'react-feather';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+let posts = (await Astro.glob('./posts/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+posts = posts.filter((post) => !post.frontmatter.draft);
+
+---
+<MainLayout title={'Abdalla Amin'}>
+	<section id="wrapper--hero" class="section--page">
+		<img id="profile-pic" src={profile_pic}/>
+
+		<div>
+			<h1 id="user-name">Abdalla Amin</h1>
+			<p id="bio">Software developer, senior full stack developer at <a href="https://www.vodafone.com/" target="_blank">_Vois</a></p>
+		</div>  
+	</section>
+	<section class="section--page">
+		<div id="socials--list">
+			<a href="https://www.linkedin.com/in/abdallaamin/" target="_blank">Linkedin</a>
+			<a href="https://github.com/abdallaamin" target="_blank">Github</a>
+			<!-- <a href="https://docs.google.com/document/d/16d4hVPVG5suc-BPgSvZJ0fZRve10XdNe9bGuGGifAGQ/edit?usp=sharing" target="_blank">Resume</a>  -->
+		</div>
+	</section>
+
+	{/*
+	<section class="section--page">
+		<a id="events"></a>
+		<h3>Upcomming Events</h3>
+		{events.map(event => (
+			<EventPreview frontmatter={event.frontmatter}/>
+		))}
+	</section>
+	*/}
+
+	
+	<section class="section--page">
+		<a id="blog"></a>
+		<h3>Latest Posts</h3>
+		{posts.map(post => (
+			<ArticlePreview frontmatter={post.frontmatter}/>
+		))}
+
+
+
+	</section>
+
+
+	{/*<Winners/>*/}
+
+</MainLayout>
+
