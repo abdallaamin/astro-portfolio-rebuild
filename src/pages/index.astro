@@ -1,9 +1,8 @@
 ---
 import '../layouts/MainLayout.astro';
 import MainLayout from '../layouts/MainLayout.astro';
-import profile_pic from '../images/me.jpg'
+import profile_pic from '../../public/images/me.jpg';
 import ArticlePreview from '../components/ArticlePreview.astro'
-import { FileText, ArrowRight, Play, Calendar} from 'react-feather';
 
 let posts = (await Astro.glob('./posts/*.{md,mdx}')).sort(
 	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
