@@ -1,4 +1,4 @@
-import { GiOwl } from 'react-icons/gi'
+import { GiOwl } from 'react-icons/gi/index.js'
 
 const Logo = () => {
     return (
